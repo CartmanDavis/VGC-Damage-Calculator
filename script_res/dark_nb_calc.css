@@ -118,6 +118,15 @@ select.decorated option:hover {
     margin:0 auto;
 }
 
+.header .wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.header .wrapper {
+    min-height: 50px;
+}
+
 .set-selector {
     width: 26em;
 }
