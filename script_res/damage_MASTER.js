@@ -1109,7 +1109,7 @@ function immunityChecks(move, attacker, defender, field, description, defAbility
         (move.type === "Fire" && ["Flash Fire", "Well-Baked Body"].indexOf(defAbility) !== -1) ||
         (move.type === "Water" && (["Dry Skin", "Water Absorb"].indexOf(defAbility) !== -1 || (defAbility === 'Storm Drain' && gen !== 4))) ||
         (move.type === "Electric" && (["Motor Drive", "Volt Absorb"].indexOf(defAbility) !== -1 || (defAbility === 'Lightning Rod' && gen > 4))) ||
-        (move.type === "Ground" && ((!field.isGravity && defender.item !== "Iron Ball" && defAbility === "Levitate") || defAbility === "Earth Eater")) ||
+        (move.type === "Ground" && ((!field.isGravity && defender.item !== "Iron Ball" && ['Levitate','Eelevate'].includes(defAbility)) || defAbility === "Earth Eater")) ||
         (move.isBullet && defAbility === "Bulletproof") ||
         (move.isSound && defAbility === "Soundproof") ||
         (move.isWind && defAbility === "Wind Rider")) {
@@ -1292,11 +1292,10 @@ function setDamage(move, attacker, defender, description, isQuarteredByProtect, 
  * - Levitate + ignoring/negating abilities (handled before; ability should be blank by the time this function is called)
  * - Flying type + Ring Target (handled in function getMoveEffectiveness)
  * - Thousand Arrows (handled in function getMoveEffectiveness)
- * - Ingrain (not implemented currently)
  * - Flying type + Roost (not implemented, not planning on implementing, wouldn't be handled here anyway)
  */
 function pIsGrounded(mon, field) {
-    return field.isGravity || mon.item == "Iron Ball" || (mon.item != "Air Balloon" && mon.ability != "Levitate" && !(mon.hasType("Flying")));
+    return field.isGravity || mon.item == "Iron Ball" || (mon.item != "Air Balloon" && !(["Levitate", "Eelevate"].includes(mon.ability)) && !(mon.hasType("Flying"))) || field.isIngrain;
 }
 
 //1. Custom BP
@@ -1875,7 +1874,13 @@ function calcAttack(move, attacker, defender, description, isCritical, defAbilit
     }
     else if (isMidMoveAtkBoost) {
         description.attackBoost = attacker.boosts[attackStat];
-        attack = getModifiedStat(attackSource.rawStats[attackStat], attacker.boosts[attackStat]);
+        //explore a possible better implementation
+        if (attackSource.boosts[attackStat] === 0 || (isCritical && attackSource.boosts[attackStat] < 0)) {
+            attack = attackSource.rawStats[attackStat];
+        }
+        else {
+            attack = getModifiedStat(attackSource.rawStats[attackStat], attacker.boosts[attackStat]);
+        }
         attacker.boosts[attackStat] -= (1 * isContrary);
     }
     //c. Crit
@@ -1951,7 +1956,8 @@ function calcAtMods(move, attacker, defAbility, description, field) {
         || (attacker.ability === "Gorilla Tactics" && move.category === "Physical" && !attacker.isDynamax)
         || (["Plus", "Minus"].indexOf(attacker.ability) !== -1 && attacker.abilityOn)
         || (attacker.ability === "Sharpness" && move.isSlice)
-        || (attacker.ability === "Rocky Payload" && move.type === "Rock")) {
+        || (attacker.ability === "Rocky Payload" && move.type === "Rock")
+        || (attacker.ability === "Fire Mane" && move.type === "Fire")) {
         atMods.push(0x1800);
         description.attackerAbility = attacker.ability;
     }
@@ -2242,10 +2248,11 @@ function calcGeneralMods(baseDamage, move, attacker, defender, defAbility, field
     var reSortDamage = false;
 
     var damage = [], additionalDamage = [], allDamage = [];
+    var minDamageValue = 85;    //this has been made into a value in case of any more damage roll alterations
 
     //GENERAL MODS CONTINUED
-    for (var i = 0; i < 16; i++) { //e. Rand mod
-        damage[i] = Math.floor(baseDamage * (85 + i) / 100);
+    for (var i = 0; i + minDamageValue <= 100; i++) { //e. Rand mod
+        damage[i] = Math.floor(baseDamage * (minDamageValue + i) / 100);
         //f. STAB mod (with Terastal changes)
         damage[i] = pokeRound(damage[i] * stabMod / 0x1000);
         //g. Type Effect mod

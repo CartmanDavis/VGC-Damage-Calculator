@@ -5740,6 +5740,10 @@ var MOVES_CHAMPIONS_NATDEX = $.extend(true, {}, MOVES_ZA_NATDEX, {
     'Dire Claw': { isSlice: true },
     'Crush Claw': { isSlice: true },
     'Dragon Cheer': { isSound: true },
+    'Freeze-Dry': { hasSecondaryEffect: false },
+    'Electro Shot': { hasSecondaryEffect: false },
+    //Reg M-B changes
+    'Make It Rain': { statChange: ['special attack', -2, 'user'] },
 
     //THE FOLLOWING IS SUBJECT TO CHANGE SINCE THEY ARE CHANGED IN THE CODE BUT NOT IN THE GAME
     'Gear Grind': { bp: 60 },
@@ -5748,22 +5752,25 @@ var MOVES_CHAMPIONS_NATDEX = $.extend(true, {}, MOVES_ZA_NATDEX, {
     'Dragon Hammer': { bp: 100 },
     'Snipe Shot': { bp: 85 },
     'Bolt Beak': { bp: 80 },
-    'Fisheous Rend': { bp: 80 },
+    'Fishious Rend': { bp: 80 },
     'Astral Barrage': { bp: 110 },
     'Triple Dive': { bp: 35 },
     'Hyper Drill': { bp: 120 },
     'Blood Moon': { bp: 130 },
     'Metal Claw': { isSlice: true },
+
+    //CHECK IF SPIRIT SHACKLE IS BOOSTED BY SHEER FORCE
 });
 
 var MOVES_CHAMPIONS = {};
-['(No Move)', 'Accelerock',
+[   //Moves available at launch
+    '(No Move)', 'Accelerock',
     'Acid Armor', 'Acid Spray', 'Acrobatics', 'Acupressure', 'Aerial Ace', 'After You', 'Agility', 'Air Cutter',
     'Air Slash', 'Alluring Voice', 'Ally Switch', 'Amnesia', 'Ancient Power', 'Apple Acid', 'Aqua Cutter', 'Aqua Jet', 'Aqua Ring',
     'Aqua Step', 'Aqua Tail', 'Armor Cannon', 'Aromatic Mist', 'Assurance', 'Attract', 'Aura Sphere', 'Aura Wheel', 'Aurora Veil',
     'Avalanche', 'Axe Kick', 'Baby-Doll Eyes', 'Baneful Bunker', 'Baton Pass', 'Beak Blast', 'Beat Up', 'Belch',
     'Belly Drum', 'Bind', 'Bite', 'Bitter Blade', 'Bitter Malice', 'Blast Burn', 'Blaze Kick', 'Blizzard',
-    'Block', 'Body Press', 'Body Slam', 'Bone Rush', 'Boomburst', 'Bounce', 'Brave Bird', 'Breaking Swipe', 'Brick Break',
+    'Block', 'Body Press', 'Body Slam', 'Bone Rush', 'Boomburst', 'Bounce', 'Brave Bird', 'Breaking Swipe', 'Brick Break', 'Brutal Swing',
     'Bug Bite', 'Bug Buzz', 'Bulk Up', 'Bulldoze', 'Bullet Punch', 'Bullet Seed', 'Burn Up', 'Burning Jealousy', 'Calm Mind',
     'Ceaseless Edge', 'Charge', 'Charge Beam', 'Charm', 'Chilling Water', 'Chilly Reception', 'Circle Throw', 'Clanging Scales',
     'Clangorous Soul', 'Clear Smog', 'Close Combat', 'Coaching', 'Coil', 'Comeuppance', 'Confuse Ray', 'Copycat',
@@ -5803,7 +5810,7 @@ var MOVES_CHAMPIONS = {};
     'Scary Face', 'Scorching Sands', 'Screech', 'Seed Bomb', 'Seismic Toss', 'Self-Destruct', 'Shadow Ball', 'Shadow Claw', 'Shadow Punch', 'Shadow Sneak',
     'Shed Tail', 'Sheer Cold', 'Shell Side Arm', 'Shell Smash', 'Shelter', 'Simple Beam', 'Sing', 'Skill Swap',
     'Skitter Smack', 'Sky Attack', 'Slack Off', 'Sleep Powder', 'Sleep Talk', 'Sludge Bomb', 'Sludge Wave', 'Smack Down',
-    'Smart Strike', 'Snap Trap', 'Snarl', 'Snore', 'Snowscape', 'Soak', 'Soft-Boiled', 'Solar Beam',
+    'Smart Strike', 'Snap Trap', 'Snarl', 'Snore', 'Snowscape', 'Soak', 'Solar Beam',
     'Solar Blade', 'Sparkling Aria', 'Speed Swap', 'Spicy Extract', 'Spikes', 'Spiky Shield', 'Spirit Shackle', /*'Spit Up',*/
     'Spite', 'Stealth Rock', 'Steel Beam', 'Steel Roller', 'Steel Wing', 'Sticky Web', 'Stockpile',
     'Stomping Tantrum', 'Stone Axe', 'Stone Edge', 'Stored Power', 'Storm Throw', 'Strength Sap', 'String Shot', 'Struggle', 'Struggle Bug',
@@ -5816,5 +5823,9 @@ var MOVES_CHAMPIONS = {};
     'Trop Kick', 'Twin Beam', 'U-turn', 'Upper Hand', 'Uproar', 'Vacuum Wave', 'Venoshock', 'Volt Switch', 'Volt Tackle',
     'Water Pulse', 'Water Shuriken', 'Water Spout', 'Waterfall', 'Wave Crash', 'Weather Ball', 'Whirlpool', 'Whirlwind',
     'Wide Guard', 'Wild Charge', 'Will-O-Wisp', 'Wish', 'Wonder Room', 'Wood Hammer', 'Worry Seed', 'Wrap', 'X-Scissor', 'Yawn', 'Zap Cannon', 'Zen Headbutt',
+    //Has move descriptions but isn't learned by any Pokemon at launch
+    //'Double Shock', 'Milk Drink', 'Power Shift', 'Revival Blessing', 'Soft-Boiled', 'Spore',
+    //Moves available starting Regulation M-B
+    'Barb Barrage', 'Make It Rain', 'No Retreat', 'Rage Fist', 'Spirit Break', 'Topsy-Turvy',
 ].forEach(e => MOVES_CHAMPIONS[e] = MOVES_CHAMPIONS_NATDEX[e]);
 //Spit Up is commented out because it hasn't been implemented
