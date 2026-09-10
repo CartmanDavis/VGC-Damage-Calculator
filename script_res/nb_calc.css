@@ -483,6 +483,7 @@ h1 a {
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
     }
     /* subtle tint so the heading still reads as a title bar in dark mode
        (light mode already has a dark heading bar on a white card) */

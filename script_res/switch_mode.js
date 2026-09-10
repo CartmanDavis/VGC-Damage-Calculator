@@ -123,6 +123,16 @@ $(function(){
 		}
 	});
 
+	// Mobile: clicking anywhere on a panel heading toggles its collapse checkbox
+	$(".poke-info > .panel-heading, .field-info > .panel-heading").on("click", function (e) {
+		// only when the mobile +/- toggle is actually shown
+		if (!$(this).children(".collapse-toggle-btn").is(":visible")) return;
+		// let real controls (the +/- button, the auto-level switch) act on their own
+		if ($(e.target).closest("label, input, select, button, a, #autolevel").length) return;
+		var cb = $(this).siblings(".collapse-toggle")[0];
+		if (cb) cb.checked = !cb.checked;
+	});
+
 })
 
 function toggleCustomModifiers(custModsOn) {
