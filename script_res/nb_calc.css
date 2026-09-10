@@ -491,6 +491,31 @@ h1 a {
     .dark .field-info .panel-heading {
         background-color: #26302f;
     }
+    /* Nudge the Pokémon title down a hair: bold text sits high in its line box */
+    .poke-info .panel-title {
+        position: relative;
+        top: 2px;
+    }
+    /* Field heading: lay the title row out with flexbox so "Auto-Level to:" and
+       its switch sit vertically centred instead of floating up to the top */
+    .field-info .panel-title {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+    #autolevel {
+        display: flex;
+        align-items: center;
+        float: none;
+        margin-left: auto; /* tuck the group over to the right */
+        white-space: nowrap;
+        font-size: 0.8em;
+        color: rgba(255, 255, 255, 0.55);
+    }
+    #autolevel .onoffswitch {
+        float: none;
+        margin-left: 0.2em !important; /* beats the inline style="margin-left:1em" */
+    }
     /* Fixed-size round +/- toggle (drawn with two bars so it's crisp and
        identically sized in every heading). Selectors are scoped with
        .panel-heading to outrank ".poke-info label { width: 6em }". */
