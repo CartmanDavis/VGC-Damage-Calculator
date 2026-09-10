@@ -309,32 +309,105 @@ h1 a {
     .nav-toggle-input:checked ~ .nav {
         display: block;
     }
+    #switchTheme, #switchDex, .dex-change {
+        margin-left: 0;
+    }
+
+    /* Section labels that divide the links from the settings */
+    .nav::before,
+    .header-toggles::before {
+        display: block;
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.5;
+    }
+    .nav::before {
+        content: "Links";
+        padding: 0 14px 4px;
+    }
+
+    /* Links list */
     .nav a {
         display: block;
         padding: 10px 14px;
         font-size: 15px;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
     }
-    #switchTheme, #switchDex, .dex-change {
-        margin-left: 0;
+    .nav a:first-of-type {
+        border-top: none;
     }
-    /* Theme / National Dex / Custom Mods become a settings list */
+
+    /* Settings block, visually separated from the links */
     .header-toggles {
         display: block;
-        margin-top: 8px;
-        padding: 8px 14px 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        margin-top: 12px;
+        padding: 12px 14px 6px;
+        background: rgba(0, 0, 0, 0.2);
+        border-top: 2px solid rgba(255, 255, 255, 0.25);
     }
+    .header-toggles::before {
+        content: "Settings";
+        margin-bottom: 8px;
+    }
+
+    /* Each setting rendered as a pill-shaped toggle switch */
     .header-toggles #switchTheme,
     .header-toggles .dex-change {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
-        max-width: none;
         box-sizing: border-box;
-        margin: 0 0 6px;
-        padding: 8px;
+        margin: 0;
+        padding: 10px 2px;
         font-size: 14px;
+        font-weight: normal;
+        line-height: 1.2;
         text-align: left;
+        color: inherit;
+        background: none;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+    }
+    .header-toggles .dex-change {
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .header-toggles #switchTheme {
+        font-size: 0; /* hide the button's own (changing) label text */
+    }
+    .header-toggles #switchTheme::before {
+        content: "Dark mode";
+        font-size: 14px;
+    }
+
+    /* switch track; the knob is the radial-gradient that slides across */
+    .header-toggles #switchTheme::after,
+    .header-toggles .dex-change::after {
+        content: "";
+        flex: none;
+        width: 42px;
+        height: 24px;
+        margin-left: 12px;
+        border-radius: 24px;
+        background-color: rgba(255, 255, 255, 0.25);
+        background-image: radial-gradient(circle 8px at center, #fff 99%, transparent 100%);
+        background-repeat: no-repeat;
+        background-position: 4px center;
+        background-size: 18px 18px;
+        transition: background-color 0.2s ease, background-position 0.2s ease;
+    }
+    .header-toggles .btn-input:checked + .dex-change {
+        background: none; /* cancel the .btn checked-state styling */
+        color: inherit;
+        font-weight: normal;
+    }
+    .header-toggles .btn-input:checked + .dex-change::after,
+    body.dark .header-toggles #switchTheme::after {
+        background-color: #3ab5f7;
+        background-position: 20px center;
     }
 
     /* Drop the empty ad-banner spacer */
