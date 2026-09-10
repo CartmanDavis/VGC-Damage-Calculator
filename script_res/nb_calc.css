@@ -282,6 +282,7 @@ h1 a {
     .nav {
         padding: 8px 0;
         line-height: 2.2;
+        text-align: center;
     }
     #switchTheme, #switchDex, .dex-change {
         margin-left: 0;
