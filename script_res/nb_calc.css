@@ -271,9 +271,10 @@ h1 a {
     display: none;
 }
 
-/* Per-panel "collapse to just the set selector" toggle; only shown on mobile */
+/* Per-panel "collapse to just the set selector" toggle; only shown on mobile.
+   Scoped past ".poke-info label { width: 6em }" from ap_calc.css. */
 .collapse-toggle,
-.collapse-toggle-btn {
+.panel-heading .collapse-toggle-btn {
     display: none;
 }
 
@@ -489,31 +490,47 @@ h1 a {
     .dark .field-info .panel-heading {
         background-color: #26302f;
     }
-    .collapse-toggle-btn {
-        display: inline-block;
+    /* Fixed-size round +/- toggle (drawn with two bars so it's crisp and
+       identically sized in every heading). Selectors are scoped with
+       .panel-heading to outrank ".poke-info label { width: 6em }". */
+    .panel-heading .collapse-toggle-btn {
+        box-sizing: border-box;
+        display: block;
         flex: none;
+        position: relative;
+        width: 28px;
+        height: 28px;
         margin-left: 12px;
-        padding: 3px 10px;
-        font-size: 12px;
-        font-weight: normal;
-        line-height: 1.4;
-        color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.45);
-        border-radius: 12px;
-        white-space: nowrap;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        background: none;
+        font-size: 0;
+        line-height: 0;
         cursor: pointer;
         -webkit-user-select: none;
         user-select: none;
     }
-    .collapse-toggle-btn::before {
-        content: "\25BE"; /* down triangle */
-        margin-right: 5px;
+    .panel-heading .collapse-toggle-btn:active {
+        background: rgba(255, 255, 255, 0.12);
     }
-    .collapse-toggle:checked ~ .panel-heading .collapse-toggle-btn {
-        background: rgba(255, 255, 255, 0.15);
+    .panel-heading .collapse-toggle-btn::before,
+    .panel-heading .collapse-toggle-btn::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 12px;
+        height: 2px;
+        margin: -1px 0 0 -6px;
+        background: #fff;
+        border-radius: 1px;
+        transition: transform 0.2s ease;
     }
-    .collapse-toggle:checked ~ .panel-heading .collapse-toggle-btn::before {
-        content: "\25B8"; /* right triangle */
+    /* ::after is the vertical stroke: flat (overlapping ::before = "-") when
+       expanded, upright ("+") when collapsed */
+    .collapse-toggle:checked ~ .panel-heading .collapse-toggle-btn::after {
+        transform: rotate(90deg);
     }
     /* !important beats the inline display styles jQuery sets on .gen-specific /
        .hide elements, so the collapsed panel really shows only the selector */
