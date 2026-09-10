@@ -314,6 +314,11 @@ h1 a {
         text-overflow: ellipsis;
     }
 
+    /* Drop the empty ad-banner spacer */
+    .ad-spacer {
+        display: none;
+    }
+
     /* Swap the format buttons for a dropdown */
     .generations {
         display: none;
