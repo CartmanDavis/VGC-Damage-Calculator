@@ -459,26 +459,35 @@ h1 a {
         max-width: 100%;
     }
 
-    /* Stack panels vertically, take up full-width */
+    /* Stack panels vertically as clearly separated, self-contained cards:
+       a generous gap between them and a single accent bar closing each one */
     .panel {
         float: none;
         display: block;
         width: auto;
-        margin: 5px 0;
+        margin: 18px 0;
+        border-bottom: 5px solid #de2808; /* .dark .panel overrides the colour */
     }
     .poke-info,
     .field-info {
         width: auto;
     }
 
-    /* Per-panel collapse toggle: a button in each heading that hides the body
-       (the Pokémon panels keep their set selector; the Field panel hides fully) */
+    /* The heading is the card's title, kept visually attached to its body:
+       drop the heavy stripe that made it read as a separate block */
     .poke-info .panel-heading,
     .field-info .panel-heading {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    /* subtle tint so the heading still reads as a title bar in dark mode
+       (light mode already has a dark heading bar on a white card) */
+    .dark .poke-info .panel-heading,
+    .dark .field-info .panel-heading {
+        background-color: #26302f;
     }
     .collapse-toggle-btn {
         display: inline-block;
@@ -510,6 +519,16 @@ h1 a {
        .hide elements, so the collapsed panel really shows only the selector */
     .poke-info .collapse-toggle:checked ~ .panel-body > *:not(.set-selector):not(.select2-container) {
         display: none !important;
+    }
+    /* when the body holds only the selector, tighten it right up: trim the
+       padding and drop the select2 widget to a block so there's no inline-block
+       baseline gap or leftover &nbsp; line under it */
+    .poke-info .collapse-toggle:checked ~ .panel-body {
+        padding: 8px 15px;
+        line-height: 0;
+    }
+    .poke-info .collapse-toggle:checked ~ .panel-body > .select2-container {
+        display: block;
     }
     /* Field panel has nothing to keep visible, so hide the whole body */
     .field-info .collapse-toggle:checked ~ .panel-body {
