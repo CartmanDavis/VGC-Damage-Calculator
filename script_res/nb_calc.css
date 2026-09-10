@@ -254,3 +254,82 @@ h1 a {
     color: #fff;
     text-decoration: none;
 }
+
+/* ============================================================
+   Mobile layout
+   ============================================================ */
+@media (max-width: 820px) {
+    html, body {
+        min-width: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .wrapper {
+        max-width: 100%;
+        padding: 0 0.5em;
+    }
+
+    /* Stack the logo and nav links */
+    .header {
+        margin-bottom: 12px;
+    }
+    .header-logo,
+    .nav {
+        float: none;
+        display: block;
+    }
+    .nav {
+        padding: 8px 0;
+        line-height: 2.2;
+    }
+    #switchTheme, #switchDex, .dex-change {
+        margin-left: 0;
+        margin-top: 4px;
+    }
+
+    /* Stack panels vertically, take up full-width */
+    .panel {
+        float: none;
+        display: block;
+        width: auto;
+        margin: 5px 0;
+    }
+    .poke-info,
+    .field-info {
+        width: auto;
+    }
+
+    /* Drop the wide min-widths, stack vertically */
+    .move-result-group {
+        min-width: 0;
+        max-width: 100%;
+        margin: 1em 0 2em;
+    }
+    .move-result-subgroup {
+        float: none;
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    /* Prevent controls from extending beyond the screen */
+    .set-selector {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .poke-info table {
+        width: 100%;
+    }
+    .info-selectors select,
+    .item, .ability,
+    .move-selector,
+    textarea {
+        max-width: 100%;
+    }
+
+    /* Empty fixed-width spacer div that sits after the main wrapper */
+    .wrapper + div {
+        max-width: 100%;
+    }
+}
