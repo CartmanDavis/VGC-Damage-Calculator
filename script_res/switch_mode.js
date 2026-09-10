@@ -133,12 +133,12 @@ $(function(){
 		if (cb) cb.checked = !cb.checked;
 	});
 
-	// Mobile: Pokémon 2 comes before the Field panel; desktop keeps DOM order
+	// Mobile: Pokémon 2 comes before the Field/Custom Sets column; desktop keeps DOM order
 	function orderPanels() {
-		var $p2 = $("#p2"), $field = $("#field-panel");
+		var $p2 = $("#p2"), $field = $("#field-column");
 		if (!$p2.length || !$field.length) return;
 		if (window.matchMedia && window.matchMedia("(max-width: 820px)").matches) {
-			if (!$p2.next().is("#field-panel")) $p2.insertBefore($field);
+			if (!$p2.next().is("#field-column")) $p2.insertBefore($field);
 		} else {
 			if (!$field.next().is("#p2")) $field.insertBefore($p2);
 		}
