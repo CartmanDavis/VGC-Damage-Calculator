@@ -471,10 +471,12 @@ h1 a {
         width: auto;
     }
 
-    /* Per-panel collapse toggle: shows a button in each Pokémon heading that
-       hides the whole body except the set selector */
-    .poke-info .panel-heading {
+    /* Per-panel collapse toggle: a button in each heading that hides the body
+       (the Pokémon panels keep their set selector; the Field panel hides fully) */
+    .poke-info .panel-heading,
+    .field-info .panel-heading {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
     }
@@ -506,8 +508,12 @@ h1 a {
     }
     /* !important beats the inline display styles jQuery sets on .gen-specific /
        .hide elements, so the collapsed panel really shows only the selector */
-    .collapse-toggle:checked ~ .panel-body > *:not(.set-selector):not(.select2-container) {
+    .poke-info .collapse-toggle:checked ~ .panel-body > *:not(.set-selector):not(.select2-container) {
         display: none !important;
+    }
+    /* Field panel has nothing to keep visible, so hide the whole body */
+    .field-info .collapse-toggle:checked ~ .panel-body {
+        display: none;
     }
 
     /* Drop the wide min-widths, stack vertically */
