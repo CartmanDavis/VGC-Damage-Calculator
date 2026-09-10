@@ -260,6 +260,12 @@ h1 a {
     display: none;
 }
 
+/* Hamburger menu toggle; only shown on mobile (see media query below) */
+.nav-toggle,
+.nav-toggle-input {
+    display: none;
+}
+
 /* ============================================================
    Mobile layout
    ============================================================ */
@@ -275,43 +281,60 @@ h1 a {
         padding: 0 0.5em;
     }
 
-    /* Stack the logo and nav links */
+    /* Collapse the top menu into a hamburger */
     .header {
         margin-bottom: 12px;
     }
-    .header-logo,
-    .nav {
-        float: none;
+    .nav-toggle {
         display: block;
+        float: right;
+        margin: 3px 0;
+        padding: 0 10px;
+        font-size: 26px;
+        line-height: 40px;
+        color: #fff;
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
     }
     .nav {
-        padding: 8px 0;
-        line-height: 2.2;
-        text-align: center;
+        display: none;
+        float: none;
+        clear: both;
+        width: 100%;
+        padding: 4px 0 10px;
+        font-size: 0; /* collapses the " | " separators between the links */
+        line-height: normal;
+    }
+    .nav-toggle-input:checked ~ .nav {
+        display: block;
+    }
+    .nav a {
+        display: block;
+        padding: 10px 14px;
+        font-size: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
     #switchTheme, #switchDex, .dex-change {
         margin-left: 0;
     }
-    /* Theme / National Dex / Custom Mods buttons get their own centered row */
+    /* Theme / National Dex / Custom Mods become a settings list */
     .header-toggles {
-        display: flex;
-        justify-content: center;
-        gap: 6px;
-        margin-top: 6px;
+        display: block;
+        margin-top: 8px;
+        padding: 8px 14px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
     .header-toggles #switchTheme,
     .header-toggles .dex-change {
-        flex: 1 1 0;
-        width: auto;
-        max-width: 9em;
-        min-width: 0;
+        display: block;
+        width: 100%;
+        max-width: none;
         box-sizing: border-box;
-        margin: 0;
-        padding: 4px 4px;
-        font-size: 0.9em;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        margin: 0 0 6px;
+        padding: 8px;
+        font-size: 14px;
+        text-align: left;
     }
 
     /* Drop the empty ad-banner spacer */
