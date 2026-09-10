@@ -255,6 +255,11 @@ h1 a {
     text-decoration: none;
 }
 
+/* Mobile-only generation dropdown; hidden on desktop in favour of the buttons */
+.gen-select-mobile {
+    display: none;
+}
+
 /* ============================================================
    Mobile layout
    ============================================================ */
@@ -307,6 +312,16 @@ h1 a {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    /* Swap the format buttons for a dropdown */
+    .generations {
+        display: none;
+    }
+    .gen-select-mobile {
+        display: inline-block;
+        margin-top: 6px;
+        max-width: 100%;
     }
 
     /* Stack panels vertically, take up full-width */

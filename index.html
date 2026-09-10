@@ -53,6 +53,18 @@
                     <input class="gen btn-input" type="radio" name="gen" value="9" id="gen9" /><label class="btn btn-small btn-mid" for="gen9">S/V</label>
                     <input class="gen btn-input" type="radio" name="gen" value="10" id="gen10" checked="checked" /><label class="btn btn-small btn-right" for="gen10">CHAMP</label>
                 </span>
+                <select class="gen-select-mobile" title="Select the generation.">
+                    <option value="1">RBY</option>
+                    <option value="2">GSC</option>
+                    <option value="3">ADV</option>
+                    <option value="4">DPP</option>
+                    <option value="5">B/W</option>
+                    <option value="6">ORAS</option>
+                    <option value="7">USUM</option>
+                    <option value="8">SWSH</option>
+                    <option value="9">S/V</option>
+                    <option value="10">CHAMP</option>
+                </select>
             </div>
             <hr />
             <p><br /><br /></p>
@@ -872,5 +884,21 @@
         <script type="text/javascript" src="afd_res/pokedex_afd24.js"></script>
         <script type="text/javascript" src="afd_res/setdex_afd24.js"></script>
         <script type="text/javascript" src="script_res/sidebars.js"></script>
+        <script type="text/javascript">
+            // Mobile-only: keep the generation dropdown in sync with the format radio buttons
+            (function () {
+                var $sel = $(".gen-select-mobile");
+                if (!$sel.length) return;
+                function syncSelectFromRadio() {
+                    var v = $(".gen.btn-input:checked").val();
+                    if (v) $sel.val(v);
+                }
+                $sel.on("change", function () {
+                    $("#gen" + $(this).val()).prop("checked", true).change();
+                });
+                $(".gen.btn-input").on("change", syncSelectFromRadio);
+                $(syncSelectFromRadio);
+            })();
+        </script>
     </body>
 </html>
