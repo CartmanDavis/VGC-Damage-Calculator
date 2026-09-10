@@ -123,6 +123,29 @@ $(function(){
 		}
 	});
 
+	// Mobile: clicking anywhere on a panel heading toggles its collapse checkbox
+	$(".poke-info > .panel-heading, .field-info > .panel-heading").on("click", function (e) {
+		// only when the mobile +/- toggle is actually shown
+		if (!$(this).children(".collapse-toggle-btn").is(":visible")) return;
+		// let real controls (the +/- button, the auto-level switch) act on their own
+		if ($(e.target).closest("label, input, select, button, a, #autolevel").length) return;
+		var cb = $(this).siblings(".collapse-toggle")[0];
+		if (cb) cb.checked = !cb.checked;
+	});
+
+	// Mobile: Pokémon 2 comes before the Field/Custom Sets column; desktop keeps DOM order
+	function orderPanels() {
+		var $p2 = $("#p2"), $field = $("#field-column");
+		if (!$p2.length || !$field.length) return;
+		if (window.matchMedia && window.matchMedia("(max-width: 820px)").matches) {
+			if (!$p2.next().is("#field-column")) $p2.insertBefore($field);
+		} else {
+			if (!$field.next().is("#p2")) $field.insertBefore($p2);
+		}
+	}
+	orderPanels();
+	$(window).on("resize", orderPanels);
+
 })
 
 function toggleCustomModifiers(custModsOn) {

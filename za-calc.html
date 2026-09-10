@@ -23,6 +23,7 @@
         <meta property="og:image" content="image_res/Logo Nimbasa City Post PNG.png" />
 
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Pokémon Damage Calculator</title>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link type="text/css" rel="stylesheet" href="script_res/select2.css" />
@@ -33,7 +34,7 @@
     <body class="dark">
         <div class="header">
             <div class="wrapper">
-                <span class="header-logo"><a href="http://nimbasacitypost.com" target="_blank" rel="noopener noreferrer"><img src="image_res/Logo Nimbasa City Post White Text PNG.png" alt="Nimbasa City Post" style="height: 45px;padding-top: 5px;" /></a></span><span class="nav"><a href="http://nimbasacitypost.com" target="_blank" rel="noopener noreferrer">Home</a> | <a href="http://play.pokemonshowdown.com/vgc" target="_blank" rel="noopener noreferrer">Showdown</a> | <a href="https://statcrusher.com/" target="_blank" rel="noopener noreferrer">StatCrusher</a> | <a href="https://docs.google.com/spreadsheets/d/1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw" target="_blank" rel="noopener noreferrer">VGCPastes Repository</a> | <a href="https://github.com/nerd-of-now/NCP-VGC-Damage-Calculator" target="_blank" rel="noopener noreferrer">GitHub Page</a> | <a href="https://www.nimbasacitypost.com/2019/12/vgc-resources.html" target="_blank" rel="noopener noreferrer">Other VGC Resources</a><button class="btn" id="switchTheme">Dark theme</button><input class="btn-input" type="checkbox" id="switchDex" /><label class="btn dex-change gen-specific g8 g9" for="switchDex" title="Include Pokémon that aren't in this gen?">National Dex</label><input class="btn-input" type="checkbox" id="toggleCustMods" /><label class="btn dex-change " for="toggleCustMods" title="Enable custom modifiers? (Technical; intended for mechanics testing)">Custom Mods</label></span>
+                <span class="header-logo"><a href="http://nimbasacitypost.com" target="_blank" rel="noopener noreferrer"><img src="image_res/Logo Nimbasa City Post White Text PNG.png" alt="Nimbasa City Post" style="height: 45px;padding-top: 5px;" /></a></span><input type="checkbox" id="navToggle" class="nav-toggle-input" /><label for="navToggle" class="nav-toggle" aria-label="Menu" title="Menu">&#9776;</label><span class="nav"><a href="http://nimbasacitypost.com" target="_blank" rel="noopener noreferrer">Home</a> | <a href="http://play.pokemonshowdown.com/vgc" target="_blank" rel="noopener noreferrer">Showdown</a> | <a href="https://statcrusher.com/" target="_blank" rel="noopener noreferrer">StatCrusher</a> | <a href="https://docs.google.com/spreadsheets/d/1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw" target="_blank" rel="noopener noreferrer">VGCPastes Repository</a> | <a href="https://github.com/nerd-of-now/NCP-VGC-Damage-Calculator" target="_blank" rel="noopener noreferrer">GitHub Page</a> | <a href="https://www.nimbasacitypost.com/2019/12/vgc-resources.html" target="_blank" rel="noopener noreferrer">Other VGC Resources</a><span class="header-toggles"><button class="btn" id="switchTheme">Dark theme</button><input class="btn-input" type="checkbox" id="switchDex" /><label class="btn dex-change gen-specific g8 g9" for="switchDex" title="Include Pokémon that aren't in this gen?">National Dex</label><input class="btn-input" type="checkbox" id="toggleCustMods" /><label class="btn dex-change " for="toggleCustMods" title="Enable custom modifiers? (Technical; intended for mechanics testing)">Custom Mods</label></span></span>
                 <div style="clear:both"></div>
             </div>
         </div>
@@ -85,7 +86,8 @@
                 </div>
             </div>
             <div class="panel poke-info" id="p1">
-                <div class="panel-heading"><h4 class="panel-title">Pokémon 1</h4></div>
+                <input type="checkbox" class="collapse-toggle" id="collapseP1" />
+                <div class="panel-heading"><h4 class="panel-title">Pokémon 1</h4><label for="collapseP1" class="collapse-toggle-btn" title="Show only the set selector">Details</label></div>
                 <div class="panel-body">
                     <input type="text" class="set-selector calc-trigger" />&nbsp;&nbsp;
                     <select class="hidden-power calc-trigger hide">
@@ -282,7 +284,9 @@
                     </div>
                 </div>
             </div>
+            <div class="field-column" id="field-column">
             <div class="panel field-info" id="field-panel">
+                <input type="checkbox" class="collapse-toggle" id="collapseField" />
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Field
@@ -297,6 +301,7 @@
                             </div>
                         </div>
                     </h4>
+                    <label for="collapseField" class="collapse-toggle-btn" title="Hide the field options">Details</label>
                 </div>
                 <div class="panel-body">
                     <!--<img id="toge" align="center" src="image_res/toge_normal.png" height="150" alt="The Face of God, Colorized (2020)" style="display: block;  margin: 0 auto;">-->
@@ -459,6 +464,12 @@
                         <div class="custom-modifiers" id="cMod"></div>
                     </div>
                     <br style="clear:both;" />
+                </div>
+            </div>
+            <div class="panel field-info" id="custom-sets-panel">
+                <input type="checkbox" class="collapse-toggle" id="collapseCustomSets" />
+                <div class="panel-heading"><h4 class="panel-title">Custom Sets</h4><label for="collapseCustomSets" class="collapse-toggle-btn" title="Hide the custom set editor">Details</label></div>
+                <div class="panel-body">
                     <p>Please enter your custom set here.</p>
                     Spread Name: <input type="text" id="spreadName" style="width: 60%" value="My Custom Set">
                     <br>
@@ -471,8 +482,10 @@
                     <p> If you encounter a bug, please report it!</p>
                 </div>
             </div>
+            </div>
             <div class="panel poke-info" id="p2">
-                <div class="panel-heading"><h4 class="panel-title">Pokémon 2</h4></div>
+                <input type="checkbox" class="collapse-toggle" id="collapseP2" />
+                <div class="panel-heading"><h4 class="panel-title">Pokémon 2</h4><label for="collapseP2" class="collapse-toggle-btn" title="Show only the set selector">Details</label></div>
                 <div class="panel-body">
                     <input type="text" class="set-selector calc-trigger" />&nbsp;&nbsp;
                     <select class="hidden-power calc-trigger hide">
