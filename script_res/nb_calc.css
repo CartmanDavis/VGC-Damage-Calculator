@@ -563,6 +563,14 @@ h1 a {
         float: none;
         width: 100%;
         margin-bottom: 1em;
+        text-align: center;
+    }
+    /* fixed-width damage readout so the centred button column stays aligned */
+    .move-result-subgroup [id^="resultDamage"] {
+        display: inline-block;
+        width: 8em;
+        text-align: left;
+        white-space: nowrap;
     }
 
     /* Prevent controls from extending beyond the screen */
