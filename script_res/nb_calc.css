@@ -285,7 +285,27 @@ h1 a {
     }
     #switchTheme, #switchDex, .dex-change {
         margin-left: 0;
-        margin-top: 4px;
+    }
+    /* Theme / National Dex / Custom Mods buttons get their own centered row */
+    .header-toggles {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 6px;
+    }
+    .header-toggles #switchTheme,
+    .header-toggles .dex-change {
+        flex: 1 1 0;
+        width: auto;
+        max-width: 9em;
+        min-width: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 4px 4px;
+        font-size: 0.9em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     /* Stack panels vertically, take up full-width */
