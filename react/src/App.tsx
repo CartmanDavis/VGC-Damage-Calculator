@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 
 import './ap_calc.css'
 import './nb_calc.css'
