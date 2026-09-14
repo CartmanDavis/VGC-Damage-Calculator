@@ -4,7 +4,7 @@ import './ap_calc.css'
 import './nb_calc.css'
 import './select2.css'
 
-import { GenerationSelect } from './GenerationSelect.js'
+import { GenerationSelect } from './GenerationSelect'
 
 function App() {
   return (
