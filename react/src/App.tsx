@@ -10,6 +10,7 @@ import { MainResultGroup } from './MainResultGroup';
 import { MoveResultGroup } from './MoveResultGroup';
 import { StatDisplayDropdown } from './StatDisplayDropdown';
 import { PokemonDetails } from './PokemonDetails';
+import { FieldDetails } from './FieldDetails';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <MoveResultGroup />
       <MainResultGroup />
       <PokemonDetails />
+      <FieldDetails />
       <PokemonDetails />
     </div>
   );
