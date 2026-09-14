@@ -9,6 +9,7 @@ import { Header } from './Header';
 import { MainResultGroup } from './MainResultGroup';
 import { MoveResultGroup } from './MoveResultGroup';
 import { StatDisplayDropdown } from './StatDisplayDropdown';
+import { PokemonDetails } from './PokemonDetails';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <StatDisplayDropdown />
       <MoveResultGroup />
       <MainResultGroup />
+      <PokemonDetails />
+      <PokemonDetails />
     </div>
   );
 }
