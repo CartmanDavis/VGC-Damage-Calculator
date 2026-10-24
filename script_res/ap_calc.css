@@ -401,6 +401,9 @@ button.addsc {
 button.pkmnsc, button.trashsc, button.editsc, button.addsc{
     cursor: pointer;
 }
+.team-sidebar {
+    float: right;
+}
 
 #mainResult {
     visibility: visible;
